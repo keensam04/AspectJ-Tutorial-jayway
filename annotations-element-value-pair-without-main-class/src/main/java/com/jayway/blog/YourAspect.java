@@ -18,8 +18,9 @@ public class YourAspect {
     }
 
     @Pointcut("@annotation(myAnnotationVariableName2)")
-    public void annotationDefinition2(MyAnnotation myAnnotationVariableName2){
+    public void annotationDefinitionLog(MyAnnotation2 myAnnotationVariableName2){
     }
+
 
 
     //Defines a pointcut that we can use in the @Before,@After, @AfterThrowing, @AfterReturning,@Around specifications
@@ -30,8 +31,8 @@ public class YourAspect {
     @Pointcut("call(* *(..))")
     public void atCall(){}
 
-    @Pointcut("call(..)")
-    public void atCall2(){}
+    /*@Pointcut("execution(* *(..))")
+    public void atExecution2(){}*/
 
     //Defines a pointcut where the @YourAnnotation exists
     //and combines that with a catch-all pointcut with the scope of execution
@@ -76,7 +77,7 @@ public class YourAspect {
         System.out.println("Resource created");
     }
 
-    @After("annotationDefinition2(myAnnotationVariableName2) && atCall2()")
+    @After("annotationDefinitionLog(myAnnotationVariableName2) && atExecution()")
     public void logBeforeMethods2(JoinPoint pointcut, MyAnnotation2 myAnnotationVariableName2){
         System.out.println("Call Maadi");
     }

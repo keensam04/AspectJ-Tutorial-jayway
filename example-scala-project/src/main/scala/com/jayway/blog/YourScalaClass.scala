@@ -31,6 +31,10 @@ class YourScalaClass {
   def mainMethod() = {
 
     System.out.println("Inside main method");
+
+    @MyAnnotation2
+    val someThing = "someThing"
+
     System.out.println("Calling second method");
     val connection = secondMethod();
     System.out.println("Exiting main method");
