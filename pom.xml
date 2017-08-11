@@ -76,6 +76,7 @@
         <module>annotations</module>
         <module>annotations-element-value-pair</module>
         <module>example-sample-project</module>
+        <module>example-scala-project</module>
         <module>annotations-element-value-pair-without-main-class</module>
     </modules>
 </project>
