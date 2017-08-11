@@ -13,10 +13,25 @@ public class YourAspect {
     public void annotationPointCutDefinition(YourAnnotation yourAnnotationVariableName){
     }
 
+    @Pointcut("@annotation(myAnnotationVariableName)")
+    public void annotationDefinition(MyAnnotation myAnnotationVariableName){
+    }
+
+    @Pointcut("@annotation(myAnnotationVariableName2)")
+    public void annotationDefinition2(MyAnnotation myAnnotationVariableName2){
+    }
+
+
     //Defines a pointcut that we can use in the @Before,@After, @AfterThrowing, @AfterReturning,@Around specifications
     //The pointcut is a catch-all pointcut with the scope of execution
     @Pointcut("execution(* *(..))")
     public void atExecution(){}
+
+    @Pointcut("call(* *(..))")
+    public void atCall(){}
+
+    @Pointcut("call(..)")
+    public void atCall2(){}
 
     //Defines a pointcut where the @YourAnnotation exists
     //and combines that with a catch-all pointcut with the scope of execution
@@ -55,4 +70,28 @@ public class YourAspect {
         //Just prints new lines after each method that's executed in
         System.out.print("\n\r");
     }
+
+    @After("annotationDefinition(myAnnotationVariableName) && atCall()")
+    public void logBeforeMethods(JoinPoint pointcut, MyAnnotation myAnnotationVariableName){
+        System.out.println("Resource created");
+    }
+
+    @After("annotationDefinition2(myAnnotationVariableName2) && atCall2()")
+    public void logBeforeMethods2(JoinPoint pointcut, MyAnnotation2 myAnnotationVariableName2){
+        System.out.println("Call Maadi");
+    }
+
+    @AfterThrowing(pointcut = "annotationPointCutDefinition(yourAnnotationVariableName) && atExecution()", throwing = "ex")
+    public void logAfterThrowingAllMethods(Exception ex, YourAnnotation yourAnnotationVariableName) throws Throwable
+    {
+        System.out.println("logAfterThrowing()"+ ex);
+    }
+
+
+
+
+
+
+
+
 }

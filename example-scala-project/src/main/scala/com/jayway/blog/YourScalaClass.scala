@@ -6,6 +6,8 @@ object YourScalaClass {
     yourClass.yourMethodAroundDontRun()
     yourClass.yourMethodAroundRunTrue()
     yourClass.yourMethodAroundRun()
+    /*yourClass.testThrowable()*/
+    yourClass.mainMethod()
   }
 }
 
@@ -20,5 +22,23 @@ class YourScalaClass {
 
   @YourAnnotation def yourMethodAroundRun(): Unit = {
     System.out.println("Executing TestTarget.yourMethodAroundRun()")
+  }
+
+  @YourAnnotation def testThrowable() ={
+    throw new Exception("Simulate error")
+  }
+
+  def mainMethod() = {
+
+    System.out.println("Inside main method");
+    System.out.println("Calling second method");
+    val connection = secondMethod();
+    System.out.println("Exiting main method");
+  }
+  @MyAnnotation def secondMethod():String={
+    System.out.println("Entered second method");
+    System.out.println("Inside second method");
+    System.out.println("Exiting second method");
+    "ConnectionObject"
   }
 }
